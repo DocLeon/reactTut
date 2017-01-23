@@ -1,14 +1,28 @@
 import React, { Component } from 'react';
 
 class App extends Component {  
+  constructor () {
+    super();
+    this.state = {
+      txt: 'this txt from state',
+      cat: 0
+    }
+  }
   render() {
-    let text = this.props.txt;
     return <div>
-      <h1>{text}</h1>
-      <b>BOLD</b>
+     <h1>{this.state.txt} - {this.state.cat}</h1>
+     <Widget update={this.update.bind(this)}/>      
+     <Widget update={this.update.bind(this)}/> 
+     <Widget update={this.update.bind(this)}/> 
     </div>
   }
+  update( e ){
+    this.setState({txt: e.target.value})
+  }
 }
+
+const Widget = (props) => <input type="text"
+        onChange={props.update}/>
 
 App.propTypes = {
   txt: React.PropTypes.string,
